@@ -15,7 +15,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin   #django.contrib is a collection of Django's built-in application, admin is Django's built-in administration application.
-from django.urls import path      #path() is a function used to define URL patterns.
+from django.urls import include , path      #path() is a function used to define URL patterns.
 from . import views               #The . means the current Python package, which is blog_main in this case. The views module is imported from the current package, allowing access to the view functions defined in blog_main/views.py.
 from django.conf import settings
 from django.conf.urls.static import static
@@ -23,4 +23,5 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.home , name='home'),
+    path('category/' , include('blogs.urls'))
 ] +static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
