@@ -19,9 +19,12 @@ from django.urls import include , path      #path() is a function used to define
 from . import views               #The . means the current Python package, which is blog_main in this case. The views module is imported from the current package, allowing access to the view functions defined in blog_main/views.py.
 from django.conf import settings
 from django.conf.urls.static import static
+from blogs import views as BlogsView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.home , name='home'),
-    path('category/' , include('blogs.urls'))
+    path('category/' , include('blogs.urls')),
+    path('<slug:slug>/', BlogsView.blogs , name='blogs'),
+    path('blogs/search/' , BlogsView.search , name='search'),
 ] +static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
